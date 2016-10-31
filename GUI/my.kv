@@ -1,16 +1,13 @@
-# File name: main.py
-# : kivy 1.8.0
+<Controller>:
+	lbl: my_label
 
-<Button>:
-	font_size: 40
-	color: 0,1,0,1
-	size_hint: 0.3,0.2
+	BoxLayout:
+		orientation: "vertical"
+		Label:
+			id: my_label
+			text: 'Move the slider' 
+		Slider:
+			min: 0
+			max: 100
+			on_value: root.new_thickness(*args)
 
-<FloatLayout>:
-	Button:
-		text: "kivy"
-		pos_hint: {"x": 0, 'top': 1}
-
-	Button:
-		text: "kivy2"
-		pos_hint: {"right": 1, 'top': 1}
