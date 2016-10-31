@@ -1,13 +1,8 @@
-<Controller>:
-	lbl: my_label
-
-	BoxLayout:
-		orientation: "vertical"
-		Label:
-			id: my_label
-			text: 'Move the slider' 
+<RootWidget>:
+	orientation: "vertical"
 		Slider:
 			min: 0
 			max: 100
-			on_value: root.new_thickness(*args)
-
+			value: 50
+			on_value: color_label.text = str(round(self.value))+"%"; root.sliders_colors = (self.value for i in xrange(3))
+		

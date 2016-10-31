@@ -1,19 +1,18 @@
 import kivy
 from kivy.app import App
-from kivy.uix.boxlayout import BoxLayout
-kivy.require('1.9.1')
+from kivy.uix.widget import Widget
+from kivy.uix.slider import Slider
 
-class Controller(BoxLayout):
-	def __init__(self):
-		super(Controller, self). __init__()
+def callback(instace, value):
+	print('the switch', instance, 'is', value)
 
-	def new_thickness(self, *args):
-        	self.lbl.text = str(int(args[1])) + "%"
+switch Switch()
 
+	
 
-class MyApp(App):
-	def build(self):
-		return Controller()
+if __name__ == '__main__':
+	class MyApp(App):
+		def build(self):
+			return RootWidget(Widget)
 
-window = MyApp()
-window.run()
+	MyApp().run()
