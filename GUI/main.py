@@ -1,22 +1,23 @@
 import kivy
+kivy.require("1.9.0")
+ 
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
-kivy.require('1.9.1')
+#The imports we use for our GUI
 
-class Controller(BoxLayout):
-	def __init__(self, mainController):
-		super(Controller, self). __init__();
-		self.mainController = mainController;
-
-	def new_thickness(self, *args):
-        	self.lbl.text = str(int(args[1])) + "%";
-
+class MainBoxLayout(BoxLayout):
+	def switch_on(self, instance, value):
+		if value is True:
+			print("Switch On")
+		else:
+			print("Switch Off")
+#This function will print Switch on when the switch is turned on and Switch off when the switch is turned of, in the console.
 
 class MyApp(App):
-	def __init__(self, mainController):
-		App.__init__(self);
-		self.mainController = mainController;
-
-
 	def build(self):
-		return Controller(self.mainController);
+		return MainBoxLayout()
+
+
+my_app = MyApp()
+my_app.run()
+#This wil run MyApp class which will run my.kv and MainBoxLayout.

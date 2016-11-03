@@ -1,13 +1,89 @@
-<Controller>:
-	lbl: my_label
+<Label>:
+	color: 1, 1, 1, 1
+		#The only thing thing Label is used for is to print text in a white color.
+
+<MainBoxLayout>:
+	#This is the box in which the whole design is made.
+
+	orientation: "vertical"
+		#All boxes (BoxLayout) will be printed vertically.
+
+	spacing: -200
+		#The space between all boxes.
+
+	padding: [100,-200,100,0]
+		#The space between the edges of the program.
+	
+	BoxLayout:
+		Label:
+			text: "Welcome to the Voice Changer \n Please select your settings"
+				#This is the text at the top of the GUI.
 
 	BoxLayout:
+		#This is the box behind all the boxes under the welcome message (above).
+	
 		orientation: "vertical"
-		Label:
-			id: my_label
-			text: 'Move the slider' 
-		Slider:
-			min: 0
-			max: 100
-			on_value: root.new_thickness(*args)
 
+		BoxLayout:
+			#This is the first box with the slider for the volume.
+
+			padding: [100,0]
+			orientation: "horizontal"
+
+			Label:
+				text: "Volume"
+					#First the text is presented.
+
+			Label:
+				text: str(round(slider_id.value,0)) + "%"
+				size_hint_x: .10
+					#After that the slider is presented with the position in 0 decimals and the distance between volume and label is 0,10.
+
+			Slider:
+				id: slider_id
+				min: 0
+				max: 100
+				value: 100
+				step: 14.28571428
+					#All the settings of the slider, such as the minimal value is zero, de maximal value is 100, starting at 100 with steps of 14.28571428, because with the system the 						volume can be changed with 7 steps.
+
+		BoxLayout:
+			#This is the box with the delay and the textinput.
+
+			padding:[100,0]
+			orientation: "horizontal"
+			
+			Label:
+				text: "Delay"
+				size_hint_x: 1
+					#The text delay with a horizontal size of 1.
+			
+			AnchorLayout:
+				TextInput:
+					id: entry
+					font_size: 15
+					multiline: False
+					size_hint_x: 0.3
+					size_hint_y: 0.18
+						#This is the textinput, with size 0,3*0,18, font size 15. This is made with an AnchorLayout, because this will center the textinput. With a boxlayout the 							textinput would be a bit more down, which will make the design very ugly.
+
+			Label:
+				text: "Seconds"
+				size_hint_x: 0.1
+					#The text seconds behind the textinput with a horizontal size of 0.1.
+
+		BoxLayout:
+			#This is the box with the distortion and the switch.
+
+			padding: [100,0]
+			orientation: "horizontal"
+
+			Label:
+				text: "Distortion"
+				size_hint_x: 1
+					#First the text Distortion is presented with size 1.
+			
+			Switch:
+				id: switch_id
+				on_active: root.switch_on(self, self.active)
+					#At the end the switch is presented.
