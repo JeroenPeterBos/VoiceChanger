@@ -1,0 +1,18 @@
+import spidev
+import time
+
+spi = spidev.SpiDev()
+spi.open(0, 1)
+
+try:
+	while True:
+		output = [0x00]
+		resp=spi.readbytes(4)
+		if 0 == 0:
+			print "new call"
+		for d in resp:
+			print "received byte: %d" % d
+	#end while
+except KeyboardInterrupt:
+	spi.close()
+#end try

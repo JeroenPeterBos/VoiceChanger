@@ -12,7 +12,7 @@ for chan in chan_list:
 	print "currently checking pin %d" % chan
 	#print "value is %d" % gpio.input(chan)
 	gpio.output(chan, 1)
-	time.sleep(2)
+	time.sleep(0.1)
 	gpio.output(chan, 0)
 
 gpio.cleanup()
