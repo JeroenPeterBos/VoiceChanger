@@ -5,7 +5,7 @@ class MainController:
 
 	def setVolume(self, val):
 		self.com.setVolume(val);
-	
+
 
 	def run(self):
 		self.gui.run();

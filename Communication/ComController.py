@@ -2,7 +2,7 @@ class ComController:
 
 	def __init__(self, controller):
 		self.controller = controller;
-		reset();
+		self.reset();
 
 
 	# clears all the gpio settings and sets them to our desired defaults
@@ -12,6 +12,8 @@ class ComController:
 
 	# processes all the set values and updates the pins accordingly
 	def update(self):
+		return
 
 
 	def setVolume(self, val):
+		return
