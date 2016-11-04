@@ -10,11 +10,17 @@ class Spi:
 		self.readQueue = Queue.Queue()
 		self.spi = spidev.SpiDev()
 		self.spi.open(0, 1)
-		self.running = True
 
 	def close(self):
-		self.spi.close()
+		self.running = False;
 		
+
+	def loop(self):
+		self.running = True:
+		while running:
+			self.cycle():
+		self.spi.close()
+
 
 	def cycle(self):
 		output = []
