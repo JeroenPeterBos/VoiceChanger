@@ -11,10 +11,11 @@
 	spacing: -200
 		#The space between all boxes.
 
-	padding: [100,-200,100,0]
+	padding: [0,-200,100,0]
 		#The space between the edges of the program.
 	
 	BoxLayout:
+		padding: [100,0,0,0]
 		Label:
 			text: "Welcome to the Voice Changer \n Please select your settings"
 				#This is the text at the top of the GUI.
@@ -23,11 +24,43 @@
 		#This is the box behind all the boxes under the welcome message (above).
 	
 		orientation: "vertical"
+		
+		BoxLayout:
+			padding: [120, 0, -270, 0]
+			
+			orientation: "horizontal"
+			size_hint_x: .55
 
+			Label:
+				text: "Audio: "
+				size_hint_x: .265
+			CheckBox:
+				group: "audio"
+				size_hint_x: .05
+				on_active: root.left(self, self.active)
+			Label:
+				text: "Left"
+				size_hint_x: .15
+			CheckBox:
+				group: "audio"
+				size_hint_x: .05
+				on_active: root.right(self, self.active)
+			Label:
+				text: "Right"
+				size_hint_x: .15
+			CheckBox:
+				group: "audio"
+				size_hint_x: .05	
+				on_active: root.both(self, self.active)
+				active: True
+			Label:
+				text: "Both"
+				size_hint_x: .15
+		
 		BoxLayout:
 			#This is the first box with the slider for the volume.
 
-			padding: [100,0]
+			padding: [75,0]
 			orientation: "horizontal"
 
 			Label:
@@ -36,6 +69,7 @@
 
 			Label:
 				text: str(slider_id.value) + " db"
+				id: labelid
 				size_hint_x: .10
 					#After that the slider is presented with the position in 0 decimals and the distance between volume and label is 0,10.
 
@@ -44,12 +78,13 @@
 				min: -34.5
 				max: 12
 				value: 0
+				bind: self.value == root.slider(self, self.value)
 				step: 1.5
 					#All the settings of the slider, such as the minimal value is zero, de maximal value is 100, starting at 100 with steps of 14.28571428, because with the system the 						volume can be changed with 7 steps.
 
 		BoxLayout:
 			orientation: "horizontal"
-			padding: [100, 0, 275, 0]
+			padding: [50, 0, 275, 0]
 
 			Label:
 				text: "Mute"
@@ -62,7 +97,7 @@
 		BoxLayout:
 			#This is the box with the delay and the textinput.
 
-			padding:[100,0]
+			padding:[80,0,100,0]
 			orientation: "horizontal"
 			
 			Label:
@@ -73,11 +108,12 @@
 			AnchorLayout:
 				TextInput:
 					id: entry
+					input_filter: 'float'
+					bind: self.on_text_validate == root.validate(self,self.text)
 					font_size: 15
 					multiline: False
 					size_hint_x: 0.3
-					size_hint_y: 0.18
-					on_text_validate: root.onTextEnter(*args)
+					size_hint_y: 0.3
 						#This is the textinput, with size 0,3*0,18, font size 15. This is made with an AnchorLayout, because this will center the textinput. With a boxlayout the 							textinput would be a bit more down, which will make the design very ugly.
 
 			Label:
@@ -88,12 +124,12 @@
 		BoxLayout:
 			#This is the box with the distortion and the switch.
 
-			padding: [100,0]
+			padding: [75,0,100,0]
 			orientation: "horizontal"
 
 			Label:
 				text: "Distortion"
-				size_hint_x: 1
+				size_hint_x: 1.2
 					#First the text Distortion is presented with size 1.
 			
 			Switch:
