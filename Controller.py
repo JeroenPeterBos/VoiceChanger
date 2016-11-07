@@ -1,21 +1,45 @@
-from GUI.main import MyApp
-from Communication.ComController import ComController
+import threading
+
+# Debug values
+view = True
+model = False
+
+if view:
+	from GUI.main import MyApp
+
+if model:
+	import Communication.Protocol
+
+
 
 class MainController:
 
-	def setVolume(self, val):
-		self.com.setVolume(val);
+	def changeVolume(self, volume, left, right):
+		self.protocol.setVolume(volume, left, right);
 
 
 	def run(self):
-		self.gui.run();
-		self.com.reset();
+		print "[MainController] - Start all threads and open up gui and connections"
+		if view:
+			self.gui.run();
+		if model:
+			self.protocol.reset();
+			self.protocol.update();
+
 		return;
+
+	def close(self):
+		# close all connections and wait for threads to finish
+		return
 
 
 	def __init__(self):
-		self.gui = MyApp(self);
-		self.com = ComController(self);
+		print "[MainController] - Initialize all components"
+		self.threads = []
+		if view:
+			self.gui = MyApp(self);
+		if model:
+			self.protocol = Protocol.Handler(self);
 		return;
 
 
