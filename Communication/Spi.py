@@ -15,38 +15,40 @@ class Spi:
 		self.running = False;
 		
 
-	def loop(self):
-		self.running = True:
-		while running:
-			self.cycle():
-		self.spi.close()
+	# def loop(self):
+	# 	self.running = True:
+	# 	while running:
+	# 		self.cycle():
+	# 	self.spi.close()
 
 
-	def cycle(self):
-		output = []
-		while not self.writeQueue.empty():
-			output.append(self.writeQueue.get())
-		if len(output) == 0:
-			output.append(0x00)
-		input = self.spi.xfer2(output)
-		for byte in input:
-			self.readQueue.put(byte)
+	# def cycle(self):
+	# 	output = []
+	# 	while not self.writeQueue.empty():
+	# 		output.append(self.writeQueue.get())
+	# 	if len(output) == 0:
+	# 		output.append(0x00)
+	# 	input = self.spi.xfer2(output)
+	# 	for byte in input:
+	# 		self.readQueue.put(byte)
 
 
-	def write(self, bytes):
-		for byte in bytes:
-			self.writeQueue.put(byte)
+	# def write(self, bytes):
+	# 	for byte in bytes:
+	# 		self.writeQueue.put(byte)
 
 
-	def readSingleSafe(self):
-		result = 0
-		while result == 0:
-			result = self.readQueue.get()
-		return result
+	# def readSingleSafe(self):
+	# 	result = 0
+	# 	while result == 0:
+	# 		result = self.readQueue.get()
+	# 	return result
 
 
-	def read(self, amount):
-		result = []
-		for i in range(amount):
-			result.append(self.readQueue.get())
-		return result
+	def send(self, sendBytes):
+		resp = self.spi.xfer2(sendBytes)
+		# handle response
+
+
+	def read(self):
+		return self.readQueue.get();

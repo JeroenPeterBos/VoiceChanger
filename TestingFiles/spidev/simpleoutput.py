@@ -2,6 +2,8 @@ import spidev
 import time
 
 spi = spidev.SpiDev()
+spi.mode = 0b00
+spi.max_speed_hz = 800000
 spi.open(0, 1)
 
 try:
