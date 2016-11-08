@@ -57,3 +57,7 @@ class Handler:
 	# Settings messages
 	def setVolume(self, val, left, right):
 		self.spi.send(Messages.Volume(val, left, right));
+
+
+	def setMute(self, mute, left, right):
+		self.spi.send(Messages.Mute(mute, left, right));

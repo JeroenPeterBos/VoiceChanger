@@ -19,6 +19,10 @@ class MainController:
 		self.protocol.setVolume(volume, left, right);
 
 
+	def changeMute(self, mute, left, right):
+		self.protocol.setMute(mute, left, right)
+
+
 	def run(self):
 		self.logger.info("run", "Start all threads and open up gui and connections")
 		if view:

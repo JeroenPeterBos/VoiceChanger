@@ -71,6 +71,23 @@ class Mute(Command):
 	def __init__(self, mute=True, left=True, right=True):
 		Command.__init__(self, 0, 0)
 		self.identifier = 0x04
+		self.mute = mute
+		self.left = left
+		self.right = right
+
+	
+	def setMute(self, mute):
+		self.mute = mute
+
+
+	def fillBytes(self):
+		# TODO: fill bytes according to protocol
+		return
+
+
+	def getBytes(self):
+		self.fillBytes()
+		return Command.getBytes(self)
 
 
 def parseNewCommand(identifier):
