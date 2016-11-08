@@ -23,10 +23,9 @@ class MainController:
 		if view:
 			self.gui.run();
 		if model:
-			self.protocol.reset();
-			self.protocol.update();
-
-		return;
+			self.threads.append(self.protocol.startThread())
+		return
+		
 
 	def close(self):
 		# close all connections and wait for threads to finish

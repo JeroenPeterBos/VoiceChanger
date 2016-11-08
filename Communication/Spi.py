@@ -1,54 +1,57 @@
 import Queue
 import spidev
 import time
+import VoiceChanger.Utils.Logger
+
+logging = True
 
 class Spi:
 	
-	def __init__(self, ComController):
-		self.ComController = ComController
+	def getSimpleName(self):
+		return "Spi"
+
+
+	def __init__(self):
+		self.logger = Logger.Logger(self, logging)
 		self.writeQueue = Queue.Queue()
 		self.readQueue = Queue.Queue()
 		self.spi = spidev.SpiDev()
 		self.spi.open(0, 1)
 
-	def close(self):
-		self.running = False;
-		
 
-	# def loop(self):
-	# 	self.running = True:
-	# 	while running:
-	# 		self.cycle():
-	# 	self.spi.close()
+	def handleInOut(self):
+		if not self.writeQueue.empty():
+			return self.writeBytes(self, self.writeQueue.get().getBytes())
+		else:
+			return writeEmpty()
 
 
-	# def cycle(self):
-	# 	output = []
-	# 	while not self.writeQueue.empty():
-	# 		output.append(self.writeQueue.get())
-	# 	if len(output) == 0:
-	# 		output.append(0x00)
-	# 	input = self.spi.xfer2(output)
-	# 	for byte in input:
-	# 		self.readQueue.put(byte)
+	def writeBytes(self, wBytes):
+		self.logger.verbose("writeBytes", "Wrote the bytes [%s]" % ",".join(format(e, "02X") for e in wBytes))
+		rbytes = []
+		self.logger.verbose("writeBytes", "Read the bytes [ %s]" % ", ".join(format(e, "02X") for e in rBytes))
+		#return response
+		return
 
 
-	# def write(self, bytes):
-	# 	for byte in bytes:
-	# 		self.writeQueue.put(byte)
+	def writeEmpty(self):
+		self.logger.verbose("writeEmpty", "Wrote an empty byte to enable MISO transfer")
+		rByte = 0x00
+		self.logger.verbose("WriteEmpty", "Read a byte with the value of %d" % format(rByte, "02X"))
+		return rByte
 
 
-	# def readSingleSafe(self):
-	# 	result = 0
-	# 	while result == 0:
-	# 		result = self.readQueue.get()
-	# 	return result
+	def flush(self):
+		command = self.writeQueue.get()
+		return self.spi.xfer2(command.getBytes())
 
 
-	def send(self, sendBytes):
-		resp = self.spi.xfer2(sendBytes)
-		# handle response
+	def send(self, command):
+		self.logger.info("send", "Added a command to the writeQueue")
+		self.writeQueue.put(command)
+
 
 
 	def read(self):
+		self.logger.info("read", "Received a command from the readQueue")
 		return self.readQueue.get();
