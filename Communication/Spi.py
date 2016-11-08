@@ -1,7 +1,7 @@
 import Queue
 import spidev
 import time
-import VoiceChanger.Utils.Logger
+from Utils import Logger
 
 logging = True
 
@@ -23,7 +23,7 @@ class Spi:
 		if not self.writeQueue.empty():
 			return self.writeBytes(self, self.writeQueue.get().getBytes())
 		else:
-			return writeEmpty()
+			return self.writeEmpty()
 
 
 	def writeBytes(self, wBytes):
@@ -36,8 +36,8 @@ class Spi:
 
 	def writeEmpty(self):
 		self.logger.verbose("writeEmpty", "Wrote an empty byte to enable MISO transfer")
-		rByte = 0x00
-		self.logger.verbose("WriteEmpty", "Read a byte with the value of %d" % format(rByte, "02X"))
+		rByte = [0x00]
+		self.logger.verbose("WriteEmpty", "Read a byte with the value of %s" % format(rByte[0], "02X"))
 		return rByte
 
 

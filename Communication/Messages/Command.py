@@ -74,8 +74,8 @@ def parseNewCommand(identifier):
 
 
 # Testing
-volumeCommand = parseNewCommand(0x02)
-bytesarray = volumeCommand.getBytes()
+#volumeCommand = parseNewCommand(0x02)
+#bytesarray = volumeCommand.getBytes()
 
-for byte in bytesarray:
-	print "got byte %s" % bin(byte)
+#for byte in bytesarray:
+#	print "got byte %s" % bin(byte)
