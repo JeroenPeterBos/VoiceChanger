@@ -1,14 +1,15 @@
 import threading
+from Utils import Logger
 
 # Debug values
-view = True
-model = False
+view = False
+model = True
 
 if view:
 	from GUI.main import MyApp
 
 if model:
-	import Communication.Protocol
+	from Communication import Protocol
 
 
 
@@ -19,7 +20,7 @@ class MainController:
 
 
 	def run(self):
-		print "[MainController] - Start all threads and open up gui and connections"
+		self.logger.info("run", "Start all threads and open up gui and connections")
 		if view:
 			self.gui.run();
 		if model:
@@ -33,13 +34,18 @@ class MainController:
 
 
 	def __init__(self):
-		print "[MainController] - Initialize all components"
+		self.logger = Logger.Logger(self)
+		self.logger.info("__init__", "Initialize all components.")
 		self.threads = []
 		if view:
 			self.gui = MyApp(self);
 		if model:
 			self.protocol = Protocol.Handler(self);
-		return;
+		return
+
+
+	def getSimpleName(self):
+		return "MainController"
 
 
 program = MainController();

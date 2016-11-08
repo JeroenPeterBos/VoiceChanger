@@ -1,6 +1,6 @@
 import Spi
 import Messages
-import VoiceChanger.Utils.Logger
+from Utils import Logger
 import Parser
 import threading
 import time
@@ -17,7 +17,7 @@ class Handler:
 		self.logger = Logger.Logger(self, logging)
 		self.controller = controller;
 		self.spi = Spi.Spi();
-		self.parser = Parser(self)
+		self.parser = Parser.Parser(self)
 		self.reset();
 
 
@@ -45,7 +45,7 @@ class Handler:
 	def cycle(self):
 		result = self.spi.handleInOut()
 		if self.parser.parseBytes(result):
-			self.cycle()
+			return self.cycle()
 
 
 	def startThread(self):

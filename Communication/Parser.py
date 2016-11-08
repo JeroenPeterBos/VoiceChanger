@@ -7,18 +7,18 @@ class Parser():
 		self.output = Protocol.spi.readQueue
 
 
-	def parseBytes(self, parseBytes, result=False):
-		if len(parseBytes) < 1:
+	def parseBytes(self, parserBytes, result=False):
+		if len(parserBytes) < 1:
 			return result
-		firstByte = parseBytes.pop(0)
+		firstByte = parserBytes.pop(0)
 		if self.currentCommand is None:
 			if firstByte == 0x00:
-				return parseBytes(self, parseBytes)
-			else
+				return self.parseBytes(parserBytes)
+			else:
 				# self.currentCommand = ...  #create command from id
-				return parseBytes(self, parseBytes, True)
+				return self.parseBytes(parserBytes, True)
 		else:
-			return parseBytes(self, parseBytes, moreToParse(self, firstByte))
+			return self.parseBytes(parserBytes, moreToParse(self, firstByte))
 
 
 
