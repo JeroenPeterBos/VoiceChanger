@@ -66,9 +66,17 @@ class Volume(Command):
 		return Command.getBytes(self)
 
 
+class Mute(Command):
+
+	def __init__(self, mute=True, left=True, right=True):
+		Command.__init__(self, 0, 0)
+		self.identifier = 0x04
+
+
 def parseNewCommand(identifier):
 	return {
 		0x02: Volume()
+		0x04: Mute()
 	}[identifier]
 
 
