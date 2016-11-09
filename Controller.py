@@ -30,7 +30,7 @@ class MainController:
 		if model:
 			self.threads.append(self.protocol.startThread())
 		return
-		
+
 
 	def close(self):
 		# close all connections and wait for threads to finish
