@@ -13,7 +13,7 @@
 
 	padding: [0,-200,100,0]
 		#The space between the edges of the program.
-	
+
 	BoxLayout:
 		padding: [100,0,0,0]
 		Label:
@@ -77,7 +77,7 @@
 				id: slider_id
 				min: -34.5
 				max: 12
-				value: 0
+				bind: value == root.volumevalue()
 				bind: self.value == root.slider(self, self.value)
 				step: 1.5
 					#All the settings of the slider, such as the minimal value is zero, de maximal value is 100, starting at 100 with steps of 14.28571428, because with the system the 						volume can be changed with 7 steps.
@@ -91,48 +91,5 @@
 				size_hint_x: .80
 			
 			CheckBox:
-				on_active: root.checkbox_mute_clicked(self, self.active)
+				on_active: root.checkbox_mute(self, self.active)
 				size_hint_x: .20
-
-		BoxLayout:
-			#This is the box with the delay and the textinput.
-
-			padding:[80,0,100,0]
-			orientation: "horizontal"
-			
-			Label:
-				text: "Delay"
-				size_hint_x: 1
-					#The text delay with a horizontal size of 1.
-			
-			AnchorLayout:
-				TextInput:
-					id: entry
-					input_filter: 'float'
-					bind: self.on_text_validate == root.validate(self,self.text)
-					font_size: 15
-					multiline: False
-					size_hint_x: 0.3
-					size_hint_y: 0.3
-						#This is the textinput, with size 0,3*0,18, font size 15. This is made with an AnchorLayout, because this will center the textinput. With a boxlayout the 							textinput would be a bit more down, which will make the design very ugly.
-
-			Label:
-				text: "Seconds"
-				size_hint_x: 0.1
-					#The text seconds behind the textinput with a horizontal size of 0.1.
-
-		BoxLayout:
-			#This is the box with the distortion and the switch.
-
-			padding: [75,0,100,0]
-			orientation: "horizontal"
-
-			Label:
-				text: "Distortion"
-				size_hint_x: 1.2
-					#First the text Distortion is presented with size 1.
-			
-			Switch:
-				id: switch_id
-				on_active: root.switch_on(self, self.active)
-					#At the end the switch is presented.
