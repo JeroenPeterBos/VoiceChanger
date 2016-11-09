@@ -81,6 +81,11 @@ class Mute(Command):
 
 
 	def fillBytes(self):
+		input = 0b00000000
+		for boolean in [self.left, self.right, self.mute]:
+			input = (input << 1) | boolean
+
+		self.values.append()
 		# TODO: fill bytes according to protocol
 		return
 
