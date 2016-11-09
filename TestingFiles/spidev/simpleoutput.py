@@ -12,6 +12,5 @@ while True:
 	spi.close()
 	
 	print "new call"
-	for d in resp:
-		print "received byte: 0x%s" % format(d, "02X")	
+	print "received byte: [%s]" % ", ".join(format(e, "02x") for e in resp)	
 	time.sleep(0.3)

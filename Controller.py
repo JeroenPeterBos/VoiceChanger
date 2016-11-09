@@ -2,8 +2,8 @@ import threading
 from Utils import Logger
 
 # Debug values
-view = False
-model = True
+view = True
+model = False
 
 if view:
 	from GUI.main import MyApp

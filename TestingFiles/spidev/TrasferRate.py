@@ -10,10 +10,10 @@ try:
 	while True:
 		output = [0xBA]
 		resp=spi.xfer2(output)
-		print "new call"
-		for d in resp:
-			print "received byte: %d" % d
-		sleep(0.1)
+		print("new call")
+		print("received bytes: ")
+		print(",".join(str(e) for e in resp))
+		time.sleep(0.1)
 	#end while
 except KeyboardInterrupt:
 	spi.close()

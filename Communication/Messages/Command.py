@@ -92,7 +92,7 @@ class Mute(Command):
 
 def parseNewCommand(identifier):
 	return {
-		0x02: Volume()
+		0x02: Volume(),
 		0x04: Mute()
 	}[identifier]
 
